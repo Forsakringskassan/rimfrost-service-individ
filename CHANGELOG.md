@@ -2,6 +2,12 @@
 
 Changelog of rimfrost-service-individ.
 
+## 0.0.2 (2026-03-25)
+
+### Bug Fixes
+
+-  Add support for setting ssn by id ([504fb](https://github.com/Forsakringskassan/rimfrost-service-individ/commit/504fb8c2a0b7eb2) Lars Persson)  
+
 ## 0.0.1 (2026-03-13)
 
 ### Bug Fixes

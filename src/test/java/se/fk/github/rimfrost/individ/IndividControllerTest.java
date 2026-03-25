@@ -54,4 +54,44 @@ class IndividControllerTest
       var response = mapper.readValue(actualResponse, GetIndividResponse.class);
       assertEquals(expectedResponse, response);
    }
+
+   @Test
+   void testIndividWithSsnInId() throws JsonProcessingException
+   {
+      var expectedResponse = new GetIndividResponse();
+      expectedResponse.setId(UUID.fromString("00000000-0000-0000-0000-199001019999"));
+      expectedResponse.setTyp("Pnr");
+      expectedResponse.setVarde("19900101-9999");
+
+      String actualResponse = given()
+            .when().get("/individ/00000000-0000-0000-0000-199001019999")
+            .then()
+            .statusCode(200)
+            .extract()
+            .body()
+            .asString();
+
+      var response = mapper.readValue(actualResponse, GetIndividResponse.class);
+      assertEquals(expectedResponse, response);
+   }
+
+   @Test
+   void testIndividWithSsnInIdButWrongPrefix() throws JsonProcessingException
+   {
+      var expectedResponse = new GetIndividResponse();
+      expectedResponse.setId(UUID.fromString("01000000-0000-0000-0000-199001019999"));
+      expectedResponse.setTyp("Pnr");
+      expectedResponse.setVarde("19900101-1234");
+
+      String actualResponse = given()
+            .when().get("/individ/01000000-0000-0000-0000-199001019999")
+            .then()
+            .statusCode(200)
+            .extract()
+            .body()
+            .asString();
+
+      var response = mapper.readValue(actualResponse, GetIndividResponse.class);
+      assertEquals(expectedResponse, response);
+   }
 }
